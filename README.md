@@ -35,21 +35,31 @@ Think of it as a startup accelerator, except every employee is an AI agent, the 
 
 ## Quick Start
 
-Three steps. That's it.
+Two steps. That's it.
 
-```bash
+```zsh
 # 1. Clone and set up
 git clone https://github.com/BLERBZ/zcomb.git
-
-# 2. cd zcomb
+cd zcomb
 bash setup.sh
-# or ./setup.sh
 
-# 3. Launch ZCombinator (starts dashboard + opens browser automatically)
+# 2. Launch ZCombinator
 bash zcomb.sh "Your objective here"
 ```
 
-Your monitoring dashboard opens at `http://localhost:3141`. Paste the printed command into Claude Code, and watch the agents go to work.
+That's the whole thing. The launcher asks for your objective interactively, starts the monitoring dashboard, opens it in your browser, and launches Claude Code with the full agent swarm -- all automatically. No copy/paste required.
+
+You can also pass your objective directly:
+
+```zsh
+./zcomb.sh "Build a SaaS analytics platform with Stripe billing"
+```
+
+Additional options:
+
+```zsh
+./zcomb.sh --no-browser "Your objective"   # Skip auto-opening the browser
+```
 
 ---
 
@@ -67,6 +77,10 @@ Your monitoring dashboard opens at `http://localhost:3141`. Paste the printed co
 
 - **Monte Carlo Risk Simulation** -- Before execution begins, ZComb runs a risk analysis and writes results to `state/risk-analysis.json`. Because even AI agents benefit from a little existential dread.
 
+- **Continuous Dashboard Enhancement** -- Every time ZComb runs, it analyzes the existing monitoring dashboard and improves it. Accessibility, responsiveness, new visualizations, micro-interactions -- the dashboard gets better with every project you run.
+
+- **One-Command Launch** -- No more copy/pasting prompts. Run `./zcomb.sh` and the launcher handles everything: interactive objective input, dashboard startup, browser opening, and Claude Code launch. One script, zero friction.
+
 - **Six-Phase Execution Model** -- Monitoring Infrastructure -> Research & Scoping -> Team Design & Spawning -> Planning & Decomposition -> Implementation & Execution -> Iteration & QA -> Validation & Closure. Every phase updates the dashboard in real time.
 
 ---
@@ -74,35 +88,37 @@ Your monitoring dashboard opens at `http://localhost:3141`. Paste the printed co
 ## How It Works
 
 ```
-You write an objective
-        |
-        v
-  ZCombinator prompt
-  (ZCombinator-Flow.md)
-        |
-        v
-  Claude Code CLI + ralph-loop skill
-        |
-        v
+./zcomb.sh
+    |
+    v
+  Interactive objective prompt (or pass as argument)
+    |
+    v
+  Dashboard starts automatically at localhost:3141
+    |
+    v
+  Claude Code launches with ralph-loop skill
+    |
+    v
   Lead Architect agent boots up
-        |
-        v
-  Phase 0: Spins up monitoring dashboard (localhost:3141)
-        |
-        v
+    |
+    v
+  Phase 0: Connects to dashboard, enhances UI/UX if dashboard already exists
+    |
+    v
   Phases 1-3: Research, design team, plan tasks
-        |
-        v
+    |
+    v
   Phases 4-5: Spawn agents -> parallel execution -> QA loops
-        |
-        v
+    |
+    v
   Phase 6: Validation, all tasks done, FULLY COMPLETE
-        |
-        v
+    |
+    v
   You have a finished project + full execution history
 ```
 
-The entire flow is driven by a single prompt template in `ZCombinator-Flow.md`. The Lead Architect reads your objective, builds the monitoring infrastructure first, then spawns specialized agents that coordinate through shared state files. Every action is logged. Every task is tracked. Every agent reports its status.
+One script, one command. `zcomb.sh` handles everything: starts the dashboard, opens your browser, builds the prompt, and launches Claude Code. The Lead Architect reads your objective, spawns specialized agents that coordinate through shared state files. Every action is logged. Every task is tracked. Every agent reports its status.
 
 ---
 

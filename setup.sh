@@ -89,6 +89,14 @@ else
     exit 1
 fi
 
+# Verify node_modules actually has content
+if [ -d "${SCRIPT_DIR}/monitor/node_modules" ] && [ "$(ls -A "${SCRIPT_DIR}/monitor/node_modules" 2>/dev/null)" ]; then
+    echo -e "  ${CHECK}  node_modules verified"
+else
+    echo -e "  ${CROSS}  node_modules is missing or empty — npm install may have silently failed"
+    exit 1
+fi
+
 echo ""
 
 # ── Done ─────────────────────────────────────────────────
@@ -98,14 +106,14 @@ echo -e "${GREEN}${BOLD}  └─────────────────
 echo ""
 echo -e "  ${BOLD}Next steps:${RESET}"
 echo ""
-echo -e "    1.  Pick an objective from ${CYAN}examples/objectives.md${RESET}"
-echo -e "        or write your own."
+echo -e "    1.  Just run ${CYAN}./zcomb.sh${RESET} to start"
+echo -e "        ${DIM}(it will ask for your objective interactively)${RESET}"
 echo ""
-echo -e "    2.  Launch ZCombinator:"
-echo -e "        ${CYAN}./zcomb.sh \"<your objective here>\"${RESET}"
+echo -e "    2.  Or pass it directly:"
+echo -e "        ${CYAN}./zcomb.sh \"Your objective here\"${RESET}"
 echo ""
-echo -e "    3.  Open the dashboard at ${CYAN}http://localhost:3141${RESET}"
-echo -e "        and watch the swarm work."
+echo -e "    3.  The dashboard opens automatically — watch the agents work at"
+echo -e "        ${CYAN}http://localhost:3141${RESET}"
 echo ""
 echo -e "  ${DIM}Full docs: ZCombinator-Flow.md${RESET}"
 echo ""

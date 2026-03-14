@@ -1,8 +1,8 @@
 #!/usr/bin/env bash
 # ─────────────────────────────────────────────────────────
 #  ZCombinator Launch Script
-#  Starts the monitoring dashboard and prints the command
-#  to kick off the autonomous agent swarm.
+#  Starts the monitoring dashboard and launches the
+#  autonomous agent swarm via Claude Code CLI.
 # ─────────────────────────────────────────────────────────
 
 set -euo pipefail
@@ -21,15 +21,49 @@ MONITOR_DIR="${SCRIPT_DIR}/monitor"
 
 DEFAULT_OBJECTIVE="Build a full-stack todo app with a Node.js API, React frontend, SQLite persistence, user authentication, and comprehensive tests."
 
-OBJECTIVE="${1:-$DEFAULT_OBJECTIVE}"
+# ── Parse flags ──────────────────────────────────────────
+NO_BROWSER=false
+OBJECTIVE=""
 
+for arg in "$@"; do
+    case "$arg" in
+        --no-browser)
+            NO_BROWSER=true
+            ;;
+        *)
+            if [ -z "$OBJECTIVE" ]; then
+                OBJECTIVE="$arg"
+            fi
+            ;;
+    esac
+done
+
+# ── Banner ───────────────────────────────────────────────
 echo ""
 echo -e "${CYAN}${BOLD}  ╔═══════════════════════════════════╗${RESET}"
 echo -e "${CYAN}${BOLD}  ║        ZCombinator Launcher        ║${RESET}"
 echo -e "${CYAN}${BOLD}  ╚═══════════════════════════════════╝${RESET}"
 echo ""
 
-# ── 1. Start the Dashboard ──────────────────────────────
+# ── 1. Interactive objective input ───────────────────────
+if [ -z "$OBJECTIVE" ]; then
+    echo -e "  ${BOLD}What is your objective?${RESET}"
+    echo -e "  ${DIM}Press Enter to use the default:${RESET}"
+    echo -e "  ${DIM}${DEFAULT_OBJECTIVE}${RESET}"
+    echo ""
+    echo -ne "  ${CYAN}▸${RESET} "
+    read -r USER_INPUT
+    echo ""
+    if [ -n "$USER_INPUT" ]; then
+        OBJECTIVE="$USER_INPUT"
+    else
+        OBJECTIVE="$DEFAULT_OBJECTIVE"
+        echo -e "  ${DIM}Using default objective.${RESET}"
+        echo ""
+    fi
+fi
+
+# ── 2. Start the Dashboard ──────────────────────────────
 echo -e "  ${BOLD}Starting monitoring dashboard...${RESET}"
 
 # Kill any existing server on port 3141
@@ -47,7 +81,7 @@ cd "${SCRIPT_DIR}"
 
 echo -e "  ${DIM}Dashboard PID: ${DASHBOARD_PID}${RESET}"
 
-# ── 2. Wait for Dashboard ───────────────────────────────
+# ── 3. Wait for Dashboard ───────────────────────────────
 echo -e "  Waiting for dashboard to be ready..."
 
 MAX_WAIT=30
@@ -66,20 +100,24 @@ done
 echo -e "  ${GREEN}✔${RESET}  Dashboard running at ${CYAN}http://localhost:3141${RESET}"
 echo ""
 
-# ── 3. Open Browser ─────────────────────────────────────
-if command -v open &>/dev/null; then
-    open "http://localhost:3141"
-    echo -e "  ${GREEN}✔${RESET}  Opened dashboard in your browser"
-elif command -v xdg-open &>/dev/null; then
-    xdg-open "http://localhost:3141"
-    echo -e "  ${GREEN}✔${RESET}  Opened dashboard in your browser"
+# ── 4. Open Browser ─────────────────────────────────────
+if [ "$NO_BROWSER" = false ]; then
+    if command -v open &>/dev/null; then
+        open "http://localhost:3141"
+        echo -e "  ${GREEN}✔${RESET}  Opened dashboard in your browser"
+    elif command -v xdg-open &>/dev/null; then
+        xdg-open "http://localhost:3141"
+        echo -e "  ${GREEN}✔${RESET}  Opened dashboard in your browser"
+    else
+        echo -e "  ${YELLOW}⚠${RESET}  Could not auto-open browser. Visit ${CYAN}http://localhost:3141${RESET} manually."
+    fi
 else
-    echo -e "  ${YELLOW}⚠${RESET}  Could not auto-open browser. Visit ${CYAN}http://localhost:3141${RESET} manually."
+    echo -e "  ${DIM}Browser auto-open skipped (--no-browser).${RESET}"
 fi
 
 echo ""
 
-# ── 4. Build the ZCombinator Prompt ─────────────────────
+# ── 5. Build the ZCombinator Prompt ─────────────────────
 read -r -d '' ZCOMB_PROMPT << 'PROMPT_TEMPLATE' || true
 # ZCombinator Autonomous Agent Network
 
@@ -99,6 +137,9 @@ You operate in Claude Code CLI. You have access to:
 ### Phase 0: Monitoring Infrastructure (DO THIS FIRST)
 The monitoring dashboard is already running at http://localhost:3141. The state directory is at monitor/state/. Write to agents.json, tasks.json, activity.jsonl, and metrics.json as you work.
 
+### Dashboard Enhancement Protocol
+If the dashboard already exists (monitor/src/ has React components), analyze the current UI/UX and create tasks to improve it. Every ZComb run should leave the dashboard better than it found it. See ZCombinator-Flow.md for the full enhancement checklist.
+
 ### Phase 1-6: Follow the full ZCombinator execution model
 See ZCombinator-Flow.md for the complete phase definitions. Execute all phases from Research & Scoping through Validation & Closure.
 PROMPT_TEMPLATE
@@ -106,21 +147,21 @@ PROMPT_TEMPLATE
 # Substitute the objective into the prompt
 ZCOMB_PROMPT="${ZCOMB_PROMPT//__OBJECTIVE_PLACEHOLDER__/${OBJECTIVE}}"
 
-# ── 5. Print the Command ────────────────────────────────
+# ── 6. Display summary and launch ───────────────────────
 echo -e "  ${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
-echo -e "  ${BOLD}Your objective:${RESET}"
+echo -e "  ${BOLD}Objective:${RESET}"
 echo -e "  ${CYAN}${OBJECTIVE}${RESET}"
 echo -e "  ${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
 echo ""
-echo -e "  ${GREEN}${BOLD}Run this command to start the swarm:${RESET}"
+echo -e "  ${GREEN}${BOLD}Launching Claude Code with ralph-loop...${RESET}"
 echo ""
-echo -e "  ${CYAN}/ralph-loop:ralph-loop \"${ZCOMB_PROMPT}${RESET}"
-echo ""
-echo -e "  ${CYAN}Output FULLY COMPLETE only after 100 percent objective fulfillment, all tasks closed, and validation passed with zero open issues.\" --max-iterations 5000 --completion-promise \"FULLY COMPLETE\"${RESET}"
-echo ""
-echo -e "  ${BOLD}━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━${RESET}"
-echo ""
-echo -e "  ${DIM}Tip: Copy the command above into your Claude Code session.${RESET}"
 echo -e "  ${DIM}Dashboard logs: /tmp/zcomb-dashboard.log${RESET}"
 echo -e "  ${DIM}To stop the dashboard later: kill ${DASHBOARD_PID}${RESET}"
 echo ""
+
+# ── 7. Execute Claude Code ──────────────────────────────
+RALPH_LOOP_CMD="/ralph-loop:ralph-loop \"${ZCOMB_PROMPT}
+
+  Output FULLY COMPLETE only after 100 percent objective fulfillment, all tasks closed, and validation passed with zero open issues.\" --max-iterations 5000 --completion-promise \"FULLY COMPLETE\""
+
+exec claude "${RALPH_LOOP_CMD}"
