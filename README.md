@@ -40,10 +40,12 @@ Three steps. That's it.
 ```bash
 # 1. Clone and set up
 git clone https://github.com/BLERBZ/zcomb.git
-cd zcomb
-bash setup.sh
 
-# 2. Launch ZCombinator (starts dashboard + opens browser automatically)
+# 2. cd zcomb
+bash setup.sh
+//or ./setup.sh
+
+# 3. Launch ZCombinator (starts dashboard + opens browser automatically)
 bash zcomb.sh "Your objective here"
 ```
 
