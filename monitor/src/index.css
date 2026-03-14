@@ -1,0 +1,69 @@
+/* Global styles for ZCombinator Dashboard */
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Custom scrollbars */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #30363d;
+  border-radius: 3px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #484f58;
+}
+
+/* Selection */
+::selection {
+  background: #58a6ff33;
+  color: inherit;
+}
+
+/* Pulse animation for connection indicator */
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
+}
+
+/* Smooth transitions for theme switching */
+* {
+  transition-property: background-color, border-color;
+  transition-duration: 0.15s;
+  transition-timing-function: ease;
+}
+
+/* Override transition on interactive elements to avoid sluggishness */
+button, select, input, a {
+  transition-duration: 0.1s;
+}
+
+/* Prevent transition on initial load */
+.no-transition * {
+  transition: none !important;
+}
+
+/* Focus styles for accessibility */
+button:focus-visible,
+select:focus-visible {
+  outline: 2px solid #58a6ff;
+  outline-offset: 2px;
+}

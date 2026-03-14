@@ -48,6 +48,8 @@ export function usePolling(intervalMs: number = 3000) {
   const [state, setState] = useState<AppState | null>(null);
   const [error, setError] = useState<string | null>(null);
   const [startTime] = useState(Date.now());
+  const [lastUpdate, setLastUpdate] = useState<number | null>(null);
+  const [consecutiveErrors, setConsecutiveErrors] = useState(0);
 
   const fetchState = useCallback(async () => {
     try {
@@ -56,8 +58,11 @@ export function usePolling(intervalMs: number = 3000) {
       const data = await res.json();
       setState(data);
       setError(null);
+      setLastUpdate(Date.now());
+      setConsecutiveErrors(0);
     } catch (e: any) {
       setError(e.message);
+      setConsecutiveErrors(prev => prev + 1);
     }
   }, []);
 
@@ -67,5 +72,9 @@ export function usePolling(intervalMs: number = 3000) {
     return () => clearInterval(id);
   }, [fetchState, intervalMs]);
 
-  return { state, error, startTime };
+  const connectionHealth: 'connected' | 'degraded' | 'disconnected' =
+    consecutiveErrors === 0 ? 'connected' :
+    consecutiveErrors < 3 ? 'degraded' : 'disconnected';
+
+  return { state, error, startTime, lastUpdate, connectionHealth };
 }

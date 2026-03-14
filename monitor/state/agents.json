@@ -3,10 +3,42 @@
     {
       "id": "architect-01",
       "name": "Lead Architect",
-      "role": "Orchestration, planning, prompt design, UX improvements",
+      "role": "System design, orchestration, and UI/UX strategy",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 8, "errors": 0 }
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
+    },
+    {
+      "id": "ui-engineer-01",
+      "name": "UI Engineer",
+      "role": "React component development and responsive design",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 5, "errors": 0 }
+    },
+    {
+      "id": "ux-designer-01",
+      "name": "UX Designer",
+      "role": "Interaction design, accessibility, and visual polish",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
+    },
+    {
+      "id": "frontend-dev-01",
+      "name": "Frontend Developer",
+      "role": "State management, animations, and data flow",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
+    },
+    {
+      "id": "qa-specialist-01",
+      "name": "QA Specialist",
+      "role": "Quality assurance, visual review, and validation",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
     }
   ]
 }

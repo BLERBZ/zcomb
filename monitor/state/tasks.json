@@ -2,91 +2,146 @@
   "tasks": [
     {
       "id": "task-001",
-      "title": "Phase 1: Analyze current zcomb prompt process and launch UX gaps",
+      "title": "Phase 0: Analyze target UI and plan upgrade strategy",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
       "dependencies": [],
-      "phase": 1,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:02:00Z"
+      "phase": 0,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:02:00Z"
     },
     {
       "id": "task-002",
-      "title": "Phase 1: Audit ZCombinator-Flow.md for formatting and missing dashboard enhancement logic",
+      "title": "Phase 1: Research modern dashboard UI/UX patterns",
       "status": "done",
-      "assignee": "architect-01",
+      "assignee": "ux-designer-01",
       "priority": "high",
-      "dependencies": [],
+      "dependencies": ["task-001"],
       "phase": 1,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:02:00Z"
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:03:00Z"
     },
     {
       "id": "task-003",
-      "title": "Phase 3: Rewrite zcomb.sh to auto-launch Claude Code with prompt",
+      "title": "Phase 4: Redesign header with branding, progress, and timer",
       "status": "done",
-      "assignee": "architect-01",
+      "assignee": "ui-engineer-01",
       "priority": "high",
       "dependencies": ["task-001"],
-      "phase": 3,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:05:00Z"
+      "phase": 4,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:05:00Z"
     },
     {
       "id": "task-004",
-      "title": "Phase 3: Rewrite ZCombinator-Flow.md with clean formatting and dashboard enhancement protocol",
+      "title": "Phase 4: Upgrade AgentCards with status badges and task display",
       "status": "done",
-      "assignee": "architect-01",
+      "assignee": "ux-designer-01",
       "priority": "high",
-      "dependencies": ["task-002"],
-      "phase": 3,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:06:00Z"
+      "dependencies": ["task-001"],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:05:00Z"
     },
     {
       "id": "task-005",
-      "title": "Phase 4: Update setup.sh for improved onboarding flow",
+      "title": "Phase 4: Redesign KanbanBoard with improved task cards",
       "status": "done",
-      "assignee": "architect-01",
-      "priority": "medium",
+      "assignee": "ui-engineer-01",
+      "priority": "high",
       "dependencies": ["task-003"],
       "phase": 4,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:07:00Z"
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:06:00Z"
     },
     {
       "id": "task-006",
-      "title": "Phase 4: Update README.md to reflect new launch process",
+      "title": "Phase 4: Upgrade ActivityFeed with timestamps and agent names",
       "status": "done",
-      "assignee": "architect-01",
-      "priority": "medium",
-      "dependencies": ["task-003", "task-004"],
+      "assignee": "frontend-dev-01",
+      "priority": "high",
+      "dependencies": ["task-003"],
       "phase": 4,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:08:00Z"
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:06:00Z"
     },
     {
       "id": "task-007",
-      "title": "Phase 5: Validate all scripts run correctly end-to-end",
+      "title": "Phase 4: Build bottom metrics bar with large stats and phase tabs",
       "status": "done",
-      "assignee": "architect-01",
+      "assignee": "ui-engineer-01",
       "priority": "high",
-      "dependencies": ["task-003", "task-004", "task-005", "task-006"],
-      "phase": 5,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:10:00Z"
+      "dependencies": ["task-003"],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:06:00Z"
     },
     {
       "id": "task-008",
-      "title": "Phase 6: Final validation — all tasks done, dashboard updated",
+      "title": "Phase 4: Integrate redesigned layout in App.tsx",
       "status": "done",
-      "assignee": "architect-01",
+      "assignee": "ui-engineer-01",
       "priority": "high",
-      "dependencies": ["task-007"],
+      "dependencies": ["task-003", "task-004", "task-005", "task-006", "task-007"],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:07:00Z"
+    },
+    {
+      "id": "task-009",
+      "title": "Phase 5: Build, test, and verify dashboard renders correctly",
+      "status": "done",
+      "assignee": "qa-specialist-01",
+      "priority": "high",
+      "dependencies": ["task-008"],
+      "phase": 5,
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:08:00Z"
+    },
+    {
+      "id": "task-010",
+      "title": "Phase 4: Fix useEffect bug — timer used useState instead of useEffect",
+      "status": "done",
+      "assignee": "frontend-dev-01",
+      "priority": "high",
+      "dependencies": [],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:05:00Z",
+      "updatedAt": "2026-03-14T22:06:00Z"
+    },
+    {
+      "id": "task-011",
+      "title": "Phase 4: Add global CSS with scrollbar styling and animations",
+      "status": "done",
+      "assignee": "ux-designer-01",
+      "priority": "medium",
+      "dependencies": ["task-008"],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:07:00Z",
+      "updatedAt": "2026-03-14T22:10:00Z"
+    },
+    {
+      "id": "task-012",
+      "title": "Phase 4: Polish GanttChart with phase indicators and styling",
+      "status": "done",
+      "assignee": "ui-engineer-01",
+      "priority": "medium",
+      "dependencies": ["task-008"],
+      "phase": 4,
+      "createdAt": "2026-03-14T22:07:00Z",
+      "updatedAt": "2026-03-14T22:10:00Z"
+    },
+    {
+      "id": "task-013",
+      "title": "Phase 6: Final validation and closure",
+      "status": "done",
+      "assignee": "qa-specialist-01",
+      "priority": "high",
+      "dependencies": ["task-011", "task-012"],
       "phase": 6,
-      "createdAt": "2026-03-14T18:00:00Z",
-      "updatedAt": "2026-03-14T18:11:00Z"
+      "createdAt": "2026-03-14T22:00:00Z",
+      "updatedAt": "2026-03-14T22:11:00Z"
     }
   ]
 }

@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { usePolling } from './hooks/usePolling';
 import { AgentCards } from './components/AgentCards';
 import { KanbanBoard } from './components/KanbanBoard';
@@ -15,16 +15,16 @@ function formatElapsed(startTime: number): string {
 }
 
 export default function App() {
-  const { state, error, startTime } = usePolling(3000);
+  const { state, error, startTime, lastUpdate, connectionHealth } = usePolling(3000);
   const [darkMode, setDarkMode] = useState(true);
   const [activityFilter, setActivityFilter] = useState<string>('all');
   const [elapsed, setElapsed] = useState('00:00:00');
 
   // Update elapsed time every second
-  useState(() => {
+  useEffect(() => {
     const id = setInterval(() => setElapsed(formatElapsed(startTime)), 1000);
     return () => clearInterval(id);
-  });
+  }, [startTime]);
 
   const tasks = state?.tasks?.tasks || [];
   const agents = state?.agents?.agents || [];
@@ -33,11 +33,10 @@ export default function App() {
   const overallProgress = totalTasks > 0 ? Math.round((doneTasks / totalTasks) * 100) : 0;
 
   const bg = darkMode ? '#0d1117' : '#ffffff';
-  const cardBg = darkMode ? '#161b22' : '#f6f8fa';
   const borderColor = darkMode ? '#30363d' : '#d0d7de';
   const textColor = darkMode ? '#e6edf3' : '#1f2328';
   const mutedColor = darkMode ? '#7d8590' : '#656d76';
-  const accentColor = '#58a6ff';
+  const headerBg = darkMode ? '#010409' : '#f6f8fa';
 
   return (
     <div style={{
@@ -45,49 +44,118 @@ export default function App() {
       background: bg,
       color: textColor,
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif',
-      fontSize: 14
+      fontSize: 14,
+      display: 'flex',
+      flexDirection: 'column'
     }}>
       {/* Top Bar */}
       <header style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '12px 24px',
+        padding: '10px 24px',
         borderBottom: `1px solid ${borderColor}`,
-        background: darkMode ? '#010409' : '#f6f8fa'
+        background: headerBg,
+        flexShrink: 0
       }}>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
-          <span style={{ fontSize: 24 }}>&#9889;</span>
-          <h1 style={{ margin: 0, fontSize: 18, fontWeight: 600 }}>ZCombinator</h1>
-          <span style={{ color: mutedColor, fontSize: 13 }}>Agent Network Monitor</span>
+        {/* Left: Brand */}
+        <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
+          <h1 style={{
+            margin: 0,
+            fontSize: 20,
+            fontWeight: 800,
+            color: '#3fb950',
+            letterSpacing: 1.5,
+            textTransform: 'uppercase'
+          }}>
+            ZCombinator
+          </h1>
+          <span style={{
+            color: mutedColor,
+            fontSize: 13,
+            fontWeight: 500,
+            borderLeft: `1px solid ${borderColor}`,
+            paddingLeft: 14
+          }}>
+            Agent Network Monitor
+          </span>
         </div>
+
+        {/* Right: Progress + Timer + Connection + Theme */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 20 }}>
-          <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-            <span style={{ color: mutedColor, fontSize: 12 }}>PROGRESS</span>
+          {/* Progress */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 10 }}>
             <div style={{
-              width: 120, height: 6, borderRadius: 3,
+              width: 140,
+              height: 6,
+              borderRadius: 3,
               background: darkMode ? '#21262d' : '#e1e4e8',
               overflow: 'hidden'
             }}>
               <div style={{
-                width: `${overallProgress}%`, height: '100%', borderRadius: 3,
-                background: overallProgress === 100 ? '#3fb950' : accentColor,
+                width: `${overallProgress}%`,
+                height: '100%',
+                borderRadius: 3,
+                background: overallProgress === 100 ? '#3fb950' : '#58a6ff',
                 transition: 'width 0.5s ease'
               }} />
             </div>
-            <span style={{ fontSize: 13, fontWeight: 600 }}>{overallProgress}%</span>
+            <span style={{
+              fontSize: 16,
+              fontWeight: 800,
+              color: overallProgress === 100 ? '#3fb950' : '#58a6ff',
+              fontVariantNumeric: 'tabular-nums'
+            }}>
+              {overallProgress}% <span style={{ fontSize: 11, fontWeight: 500, color: mutedColor }}>Complete</span>
+            </span>
           </div>
-          <div style={{ color: mutedColor, fontSize: 13, fontFamily: 'monospace' }}>
+
+          {/* Timer */}
+          <div style={{
+            color: mutedColor,
+            fontSize: 14,
+            fontFamily: 'monospace',
+            fontWeight: 600,
+            letterSpacing: 1
+          }}>
             {elapsed}
           </div>
+
+          {/* Connection Health */}
+          <div style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+            <div style={{
+              width: 8,
+              height: 8,
+              borderRadius: '50%',
+              background: connectionHealth === 'connected' ? '#3fb950' :
+                connectionHealth === 'degraded' ? '#d29922' : '#f85149',
+              boxShadow: `0 0 6px ${connectionHealth === 'connected' ? '#3fb950' :
+                connectionHealth === 'degraded' ? '#d29922' : '#f85149'}`,
+              animation: connectionHealth === 'connected' ? 'none' : 'pulse 1.5s infinite'
+            }} />
+            <span style={{ color: mutedColor, fontSize: 11 }}>
+              {lastUpdate ? `${Math.round((Date.now() - lastUpdate) / 1000)}s ago` : 'connecting...'}
+            </span>
+          </div>
+
           {error && <span style={{ color: '#f85149', fontSize: 12 }}>Connection error</span>}
+
+          {/* Theme Toggle */}
           <button
             onClick={() => setDarkMode(!darkMode)}
             style={{
-              background: 'none', border: `1px solid ${borderColor}`,
-              borderRadius: 6, padding: '4px 10px', cursor: 'pointer',
-              color: textColor, fontSize: 12
+              background: 'none',
+              border: `1px solid ${borderColor}`,
+              borderRadius: 6,
+              padding: '4px 12px',
+              cursor: 'pointer',
+              color: textColor,
+              fontSize: 12,
+              fontWeight: 500,
+              transition: 'background 0.2s'
             }}
+            onMouseEnter={e => (e.currentTarget.style.background = darkMode ? '#21262d' : '#e1e4e8')}
+            onMouseLeave={e => (e.currentTarget.style.background = 'none')}
           >
             {darkMode ? 'Light' : 'Dark'}
           </button>
@@ -97,48 +165,76 @@ export default function App() {
       {/* Main Layout */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '260px 1fr 300px',
-        gridTemplateRows: 'auto 1fr auto',
-        gap: 0,
-        height: 'calc(100vh - 53px)',
+        gridTemplateColumns: '280px 1fr 320px',
+        flex: 1,
         overflow: 'hidden'
       }}>
         {/* Left: Agent Cards */}
         <div style={{
-          gridRow: '1 / 4',
           borderRight: `1px solid ${borderColor}`,
           overflowY: 'auto',
           padding: 16
         }}>
-          <h3 style={{ margin: '0 0 12px', fontSize: 12, textTransform: 'uppercase', color: mutedColor, letterSpacing: 1 }}>
-            Agents ({agents.length})
+          <h3 style={{
+            margin: '0 0 14px',
+            fontSize: 12,
+            fontWeight: 700,
+            textTransform: 'uppercase',
+            color: mutedColor,
+            letterSpacing: 1.5
+          }}>
+            Agents
           </h3>
           <AgentCards agents={agents} darkMode={darkMode} />
         </div>
 
-        {/* Center: Kanban + Gantt */}
-        <div style={{ overflowY: 'auto', padding: 16 }}>
+        {/* Center: Task Board + Gantt */}
+        <div style={{
+          overflowY: 'auto',
+          padding: 16,
+          display: 'flex',
+          flexDirection: 'column'
+        }}>
           <KanbanBoard tasks={tasks} agents={agents} darkMode={darkMode} />
           <GanttChart tasks={tasks} metrics={state?.metrics} darkMode={darkMode} />
         </div>
 
         {/* Right: Activity Feed */}
         <div style={{
-          gridRow: '1 / 4',
           borderLeft: `1px solid ${borderColor}`,
           overflowY: 'auto',
-          padding: 16
+          padding: 16,
+          display: 'flex',
+          flexDirection: 'column'
         }}>
-          <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: 12 }}>
-            <h3 style={{ margin: 0, fontSize: 12, textTransform: 'uppercase', color: mutedColor, letterSpacing: 1 }}>
-              Activity
+          <div style={{
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'space-between',
+            marginBottom: 14
+          }}>
+            <h3 style={{
+              margin: 0,
+              fontSize: 12,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              color: mutedColor,
+              letterSpacing: 1.5
+            }}>
+              Activity Feed
             </h3>
             <select
               value={activityFilter}
               onChange={e => setActivityFilter(e.target.value)}
               style={{
-                background: cardBg, border: `1px solid ${borderColor}`,
-                borderRadius: 4, padding: '2px 6px', color: textColor, fontSize: 11
+                background: darkMode ? '#161b22' : '#ffffff',
+                border: `1px solid ${borderColor}`,
+                borderRadius: 6,
+                padding: '3px 8px',
+                color: textColor,
+                fontSize: 11,
+                cursor: 'pointer',
+                outline: 'none'
               }}
             >
               <option value="all">All Agents</option>
@@ -147,26 +243,30 @@ export default function App() {
               ))}
             </select>
           </div>
-          <ActivityFeed
-            activity={state?.activity || []}
-            filter={activityFilter}
-            darkMode={darkMode}
-          />
+          <div style={{ flex: 1, overflowY: 'auto' }}>
+            <ActivityFeed
+              activity={state?.activity || []}
+              filter={activityFilter}
+              darkMode={darkMode}
+              agents={agents}
+            />
+          </div>
         </div>
+      </div>
 
-        {/* Bottom: Metrics */}
-        <div style={{
-          gridColumn: '2',
-          borderTop: `1px solid ${borderColor}`,
-          padding: 16
-        }}>
-          <MetricsPanel
-            tasks={tasks}
-            agents={agents}
-            metrics={state?.metrics}
-            darkMode={darkMode}
-          />
-        </div>
+      {/* Bottom: Metrics Bar */}
+      <div style={{
+        borderTop: `1px solid ${borderColor}`,
+        padding: '12px 24px',
+        background: headerBg,
+        flexShrink: 0
+      }}>
+        <MetricsPanel
+          tasks={tasks}
+          agents={agents}
+          metrics={state?.metrics}
+          darkMode={darkMode}
+        />
       </div>
     </div>
   );
