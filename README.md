@@ -43,7 +43,7 @@ git clone https://github.com/BLERBZ/zcomb.git
 
 # 2. cd zcomb
 bash setup.sh
-//or ./setup.sh
+# or ./setup.sh
 
 # 3. Launch ZCombinator (starts dashboard + opens browser automatically)
 bash zcomb.sh "Your objective here"
