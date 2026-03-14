@@ -39,18 +39,15 @@ Three steps. That's it.
 
 ```bash
 # 1. Clone and set up
-git clone https://github.com/your-org/zcombinator.git
-cd zcombinator
+git clone https://github.com/BLERBZ/zcomb.git
+cd zcomb
 bash setup.sh
 
-# 2. Launch ZCombinator
-bash zcomb.sh
-
-# 3. Open the dashboard
-open http://localhost:3141
+# 2. Launch ZCombinator (starts dashboard + opens browser automatically)
+bash zcomb.sh "Your objective here"
 ```
 
-Your monitoring dashboard is now live. Paste your objective into the prompt, and watch the agents go to work.
+Your monitoring dashboard opens at `http://localhost:3141`. Paste the printed command into Claude Code, and watch the agents go to work.
 
 ---
 
@@ -110,7 +107,7 @@ The entire flow is driven by a single prompt template in `ZCombinator-Flow.md`. 
 ## Architecture
 
 ```
-zcombinator/
+zcomb/
   |
   |-- ZCombinator-Flow.md    # The brain: prompt template that drives everything
   |-- setup.sh               # One-time setup

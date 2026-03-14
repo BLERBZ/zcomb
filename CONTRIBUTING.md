@@ -38,8 +38,8 @@ We review PRs promptly. Keep them focused -- one feature or fix per PR.
 
 ```bash
 # Clone your fork
-git clone https://github.com/your-username/zcombinator.git
-cd zcombinator
+git clone https://github.com/BLERBZ/zcomb.git
+cd zcomb
 
 # Install monitor dependencies
 cd monitor
@@ -58,7 +58,7 @@ npm run server
 ### Project Structure at a Glance
 
 ```
-zcombinator/
+zcomb/
   ZCombinator-Flow.md   -- The core prompt template (handle with care)
   setup.sh              -- User-facing setup script
   zcomb.sh              -- Launch script
