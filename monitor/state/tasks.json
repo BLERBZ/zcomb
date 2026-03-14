@@ -1,0 +1,158 @@
+{
+  "tasks": [
+    {
+      "id": "task-001",
+      "title": "Build monitoring dashboard infrastructure",
+      "status": "done",
+      "assignee": "architect-01",
+      "priority": "high",
+      "dependencies": [],
+      "phase": 0,
+      "createdAt": "2026-03-14T10:15:00Z",
+      "updatedAt": "2026-03-14T10:16:00Z"
+    },
+    {
+      "id": "task-002",
+      "title": "Initialize git repo with .gitignore",
+      "status": "done",
+      "assignee": "scaffolder-01",
+      "priority": "high",
+      "dependencies": [],
+      "phase": 1,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:17:00Z"
+    },
+    {
+      "id": "task-003",
+      "title": "Create polished ZCombinator prompt template (zcomb-prompt.md)",
+      "status": "done",
+      "assignee": "core-builder-01",
+      "priority": "high",
+      "dependencies": [],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:18:00Z"
+    },
+    {
+      "id": "task-004",
+      "title": "Write README.md — fun, witty, comprehensive",
+      "status": "done",
+      "assignee": "docs-writer-01",
+      "priority": "high",
+      "dependencies": ["task-002"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:19:00Z"
+    },
+    {
+      "id": "task-005",
+      "title": "Create setup.sh — one-command install walkthrough",
+      "status": "done",
+      "assignee": "core-builder-01",
+      "priority": "high",
+      "dependencies": ["task-002"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:18:30Z"
+    },
+    {
+      "id": "task-006",
+      "title": "Create zcomb.sh launch script — runs prompt + opens browser",
+      "status": "done",
+      "assignee": "core-builder-01",
+      "priority": "high",
+      "dependencies": ["task-003", "task-005"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:19:00Z"
+    },
+    {
+      "id": "task-007",
+      "title": "Create CONTRIBUTING.md with guidelines",
+      "status": "done",
+      "assignee": "docs-writer-01",
+      "priority": "medium",
+      "dependencies": ["task-002"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:20:00Z"
+    },
+    {
+      "id": "task-008",
+      "title": "Add MIT LICENSE file",
+      "status": "done",
+      "assignee": "scaffolder-01",
+      "priority": "medium",
+      "dependencies": ["task-002"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:17:02Z"
+    },
+    {
+      "id": "task-009",
+      "title": "Create examples/ directory with sample objectives",
+      "status": "done",
+      "assignee": "core-builder-01",
+      "priority": "medium",
+      "dependencies": ["task-003"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:18:00Z"
+    },
+    {
+      "id": "task-010",
+      "title": "Create CLAUDE.md project config for the repo",
+      "status": "done",
+      "assignee": "scaffolder-01",
+      "priority": "medium",
+      "dependencies": ["task-002"],
+      "phase": 4,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:17:03Z"
+    },
+    {
+      "id": "task-011",
+      "title": "QA: Validate setup.sh runs correctly",
+      "status": "done",
+      "assignee": "qa-engineer-01",
+      "priority": "high",
+      "dependencies": ["task-005"],
+      "phase": 5,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:22:00Z"
+    },
+    {
+      "id": "task-012",
+      "title": "QA: Validate zcomb.sh launch script works end-to-end",
+      "status": "done",
+      "assignee": "qa-engineer-01",
+      "priority": "high",
+      "dependencies": ["task-006"],
+      "phase": 5,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:22:00Z"
+    },
+    {
+      "id": "task-013",
+      "title": "QA: Validate monitoring dashboard loads and polls correctly",
+      "status": "done",
+      "assignee": "qa-engineer-01",
+      "priority": "high",
+      "dependencies": ["task-001"],
+      "phase": 5,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:22:00Z"
+    },
+    {
+      "id": "task-014",
+      "title": "Final validation: all files present, docs accurate, repo clean",
+      "status": "done",
+      "assignee": "architect-01",
+      "priority": "high",
+      "dependencies": ["task-011", "task-012", "task-013"],
+      "phase": 6,
+      "createdAt": "2026-03-14T10:16:30Z",
+      "updatedAt": "2026-03-14T10:23:00Z"
+    }
+  ]
+}

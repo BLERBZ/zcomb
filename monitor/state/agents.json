@@ -1,0 +1,44 @@
+{
+  "agents": [
+    {
+      "id": "architect-01",
+      "name": "Lead Architect",
+      "role": "System design, decomposition, and orchestration",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
+    },
+    {
+      "id": "scaffolder-01",
+      "name": "Repo Scaffolder",
+      "role": "Git initialization, project structure, config files",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
+    },
+    {
+      "id": "docs-writer-01",
+      "name": "Docs Writer",
+      "role": "Documentation, README, guides — with wit and style",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
+    },
+    {
+      "id": "core-builder-01",
+      "name": "Core Builder",
+      "role": "Prompt template, setup script, launch script",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
+    },
+    {
+      "id": "qa-engineer-01",
+      "name": "QA Engineer",
+      "role": "Testing, validation, quality assurance",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
+    }
+  ]
+}
