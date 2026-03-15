@@ -3,39 +3,39 @@
     {
       "id": "architect-01",
       "name": "Lead Architect",
-      "role": "System design, orchestration, and UI/UX strategy",
+      "role": "Orchestration, video pipeline design, and quality control",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
+    },
+    {
+      "id": "video-engineer-01",
+      "name": "Video Engineer",
+      "role": "Remotion composition development, animation, and rendering",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
+    },
+    {
+      "id": "motion-designer-01",
+      "name": "Motion Designer",
+      "role": "Advanced animations, transitions, particle effects, and visual polish",
       "status": "done",
       "currentTask": null,
       "metrics": { "tasksCompleted": 2, "errors": 0 }
     },
     {
-      "id": "ui-engineer-01",
-      "name": "UI Engineer",
-      "role": "React component development and responsive design",
+      "id": "audio-engineer-01",
+      "name": "Audio Engineer",
+      "role": "Audio integration, sound design, and timing synchronization",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 5, "errors": 0 }
+      "metrics": { "tasksCompleted": 1, "errors": 0 }
     },
     {
-      "id": "ux-designer-01",
-      "name": "UX Designer",
-      "role": "Interaction design, accessibility, and visual polish",
-      "status": "done",
-      "currentTask": null,
-      "metrics": { "tasksCompleted": 3, "errors": 0 }
-    },
-    {
-      "id": "frontend-dev-01",
-      "name": "Frontend Developer",
-      "role": "State management, animations, and data flow",
-      "status": "done",
-      "currentTask": null,
-      "metrics": { "tasksCompleted": 2, "errors": 0 }
-    },
-    {
-      "id": "qa-specialist-01",
-      "name": "QA Specialist",
-      "role": "Quality assurance, visual review, and validation",
+      "id": "qa-lead-01",
+      "name": "QA Lead",
+      "role": "Render validation, visual QA, and final acceptance testing",
       "status": "done",
       "currentTask": null,
       "metrics": { "tasksCompleted": 2, "errors": 0 }

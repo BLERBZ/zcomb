@@ -40,23 +40,27 @@ export default function App() {
 
   return (
     <div style={{
-      minHeight: '100vh',
+      height: '100vh',
       background: bg,
       color: textColor,
       fontFamily: '-apple-system, BlinkMacSystemFont, "Segoe UI", "Noto Sans", Helvetica, Arial, sans-serif',
       fontSize: 14,
       display: 'flex',
-      flexDirection: 'column'
+      flexDirection: 'column',
+      overflow: 'hidden',
     }}>
       {/* Top Bar */}
       <header style={{
         display: 'flex',
         alignItems: 'center',
         justifyContent: 'space-between',
-        padding: '10px 24px',
+        padding: '8px 16px',
         borderBottom: `1px solid ${borderColor}`,
         background: headerBg,
-        flexShrink: 0
+        flexShrink: 0,
+        gap: 12,
+        flexWrap: 'wrap',
+        minHeight: 44,
       }}>
         {/* Left: Brand */}
         <div style={{ display: 'flex', alignItems: 'center', gap: 14 }}>
@@ -131,7 +135,7 @@ export default function App() {
                 connectionHealth === 'degraded' ? '#d29922' : '#f85149',
               boxShadow: `0 0 6px ${connectionHealth === 'connected' ? '#3fb950' :
                 connectionHealth === 'degraded' ? '#d29922' : '#f85149'}`,
-              animation: connectionHealth === 'connected' ? 'none' : 'pulse 1.5s infinite'
+              animation: connectionHealth === 'connected' ? 'pulse-healthy 2.5s ease-in-out infinite' : 'pulse 1.5s infinite'
             }} />
             <span style={{ color: mutedColor, fontSize: 11 }}>
               {lastUpdate ? `${Math.round((Date.now() - lastUpdate) / 1000)}s ago` : 'connecting...'}
@@ -162,56 +166,66 @@ export default function App() {
         </div>
       </header>
 
-      {/* Main Layout */}
+      {/* Main Layout — sidebars scale with viewport, center fills remainder */}
       <div style={{
         display: 'grid',
-        gridTemplateColumns: '280px 1fr 320px',
+        gridTemplateColumns: 'clamp(120px, 16vw, 250px) 1fr clamp(140px, 18vw, 290px)',
         flex: 1,
-        overflow: 'hidden'
+        overflow: 'hidden',
+        minHeight: 0,
       }}>
-        {/* Left: Agent Cards */}
+        {/* Left: Agent Cards — independent scroll */}
         <div style={{
           borderRight: `1px solid ${borderColor}`,
-          overflowY: 'auto',
-          padding: 16
+          overflow: 'hidden',
+          display: 'flex',
+          flexDirection: 'column',
+          minHeight: 0,
         }}>
-          <h3 style={{
-            margin: '0 0 14px',
-            fontSize: 12,
-            fontWeight: 700,
-            textTransform: 'uppercase',
-            color: mutedColor,
-            letterSpacing: 1.5
-          }}>
-            Agents
-          </h3>
-          <AgentCards agents={agents} darkMode={darkMode} />
+          <div style={{ padding: '14px 14px 0', flexShrink: 0 }}>
+            <h3 style={{
+              margin: '0 0 12px',
+              fontSize: 12,
+              fontWeight: 700,
+              textTransform: 'uppercase',
+              color: mutedColor,
+              letterSpacing: 1.5
+            }}>
+              Agents
+            </h3>
+          </div>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '0 14px 14px', minHeight: 0 }}>
+            <AgentCards agents={agents} darkMode={darkMode} />
+          </div>
         </div>
 
-        {/* Center: Task Board + Gantt */}
+        {/* Center: Task Board + Gantt — independent scroll */}
         <div style={{
-          overflowY: 'auto',
-          padding: 16,
+          overflow: 'hidden',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          minHeight: 0,
         }}>
           <KanbanBoard tasks={tasks} agents={agents} darkMode={darkMode} />
-          <GanttChart tasks={tasks} metrics={state?.metrics} darkMode={darkMode} />
+          <div style={{ flexShrink: 0, padding: '0 14px 14px', overflowX: 'auto' }}>
+            <GanttChart tasks={tasks} metrics={state?.metrics} darkMode={darkMode} />
+          </div>
         </div>
 
-        {/* Right: Activity Feed */}
+        {/* Right: Activity Feed — independent scroll */}
         <div style={{
           borderLeft: `1px solid ${borderColor}`,
-          overflowY: 'auto',
-          padding: 16,
+          overflow: 'hidden',
           display: 'flex',
-          flexDirection: 'column'
+          flexDirection: 'column',
+          minHeight: 0,
         }}>
           <div style={{
             display: 'flex',
             alignItems: 'center',
             justifyContent: 'space-between',
-            marginBottom: 14
+            padding: '14px 14px 10px',
+            flexShrink: 0,
           }}>
             <h3 style={{
               margin: 0,
@@ -243,7 +257,7 @@ export default function App() {
               ))}
             </select>
           </div>
-          <div style={{ flex: 1, overflowY: 'auto' }}>
+          <div style={{ flex: 1, overflowY: 'auto', padding: '0 14px 14px', minHeight: 0 }}>
             <ActivityFeed
               activity={state?.activity || []}
               filter={activityFilter}

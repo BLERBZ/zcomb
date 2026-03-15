@@ -1,7 +1,7 @@
 {
   "completionPct": 100,
   "errorRate": 0,
-  "tasksPerHour": 40,
+  "tasksPerHour": 24,
   "phases": [
     { "phase": 0, "name": "Monitoring", "progress": 100 },
     { "phase": 1, "name": "Research", "progress": 100 },
