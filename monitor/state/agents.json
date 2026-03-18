@@ -3,34 +3,42 @@
     {
       "id": "architect-01",
       "name": "Lead Architect",
-      "role": "Orchestration, website design direction, template architecture",
+      "role": "System design, reinforcement learning architecture, soul integration",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 5, "errors": 0 }
+      "metrics": { "tasksCompleted": 6, "errors": 0 }
     },
     {
-      "id": "ui-eng-01",
-      "name": "UI Engineer",
-      "role": "Visual design, CSS animations, attention-grabbing effects",
+      "id": "frontend-eng-01",
+      "name": "Frontend Engineer",
+      "role": "Heart UI component, template injection, CSS/JS animations",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 3, "errors": 0 }
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
     },
     {
-      "id": "frontend-dev-01",
-      "name": "Frontend Developer",
-      "role": "Template development, responsive layout, component structure",
+      "id": "backend-eng-01",
+      "name": "Backend Engineer",
+      "role": "Like API, data persistence, serverless functions",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 3, "errors": 0 }
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
+    },
+    {
+      "id": "soul-eng-01",
+      "name": "Soul Engineer",
+      "role": "Likes module, soul integration, reinforcement feedback loop",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
     },
     {
       "id": "qa-eng-01",
       "name": "QA Engineer",
-      "role": "Build verification, template rendering, visual QA",
+      "role": "Template rendering, build verification, integration testing",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 3, "errors": 0 }
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
     }
   ]
 }

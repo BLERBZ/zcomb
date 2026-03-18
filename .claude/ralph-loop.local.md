@@ -4,7 +4,7 @@ iteration: 1
 session_id: 
 max_iterations: 5000
 completion_promise: "FULLY COMPLETE"
-started_at: "2026-03-14T16:04:53Z"
+started_at: "2026-03-18T20:31:53Z"
 ---
 
 ZCOMBINATOR AUTONOMOUS AGENT NETWORK
@@ -13,7 +13,7 @@ You are a Lead Architect executing a multi-agent project with live monitoring. Y
 
 PRIMARY OBJECTIVE
 
-**Using the updated and better functioning monitoring UI in the image/file in this repo: ZComb-UI-sample.png, upgrade the baseline for zcomb and also make the capabilitiesess and process more customized, aligned based on the objectives, so the UI should enhancece and adapt to use cases, best, latest UI/UX practices**
+**Need to make significant update to the Mutatis UI on all of it's websites and the system of Mutatis. Mutatis should now always have a mostly transparent Heart icon in the bottom right of the page windows.  This is a very minimal, simple icon, that's highlighted when clicked to instruct to the system that a user 'likes' the daily website creation.  This data must be recorded, totaled, taken account for over time and used as the only influence on the daily creations outside the primary goal, and soul.  This is to help the Mutatis system evolve and improve in the right directions. MAke this an advanced, well-oiled human re-inforcement data usage and improvement system.**
 
 Execution Model
 
