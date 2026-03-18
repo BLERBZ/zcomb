@@ -1,136 +1,114 @@
 {
   "tasks": [
     {
-      "id": "task-200",
-      "title": "Phase 0: Initialize monitoring for BLERBZ promo video project",
+      "id": "task-001",
+      "title": "Phase 0: Analyze existing Mutatis website templates and pipeline",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
       "dependencies": [],
       "phase": 0,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:10:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:05:00Z"
     },
     {
-      "id": "task-201",
-      "title": "Phase 1: Analyze existing Remotion composition and identify upgrade opportunities",
+      "id": "task-002",
+      "title": "Phase 1: Research Day One website requirements — premium editorial design",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
-      "dependencies": ["task-200"],
+      "dependencies": ["task-001"],
       "phase": 1,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:10:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:10:00Z"
     },
     {
-      "id": "task-202",
-      "title": "Phase 1: Inventory all brand assets, screenshots, and audio",
+      "id": "task-003",
+      "title": "Phase 3: Design template architecture — hero, articles, facts, quote, CTA, footer",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
-      "dependencies": ["task-200"],
-      "phase": 1,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:10:00Z"
-    },
-    {
-      "id": "task-203",
-      "title": "Phase 3: Design enhanced video composition with all 16 screenshots",
-      "status": "done",
-      "assignee": "video-engineer-01",
-      "priority": "high",
-      "dependencies": ["task-201", "task-202"],
+      "dependencies": ["task-002"],
       "phase": 3,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:15:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:15:00Z"
     },
     {
-      "id": "task-204",
-      "title": "Phase 4: Build epic intro sequence with logo reveal and particle effects",
+      "id": "task-004",
+      "title": "Phase 4: Build index.html template — frosted glass cards, animated hero, particles",
       "status": "done",
-      "assignee": "motion-designer-01",
+      "assignee": "frontend-dev-01",
       "priority": "high",
-      "dependencies": ["task-203"],
+      "dependencies": ["task-003"],
       "phase": 4,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:20:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:30:00Z"
     },
     {
-      "id": "task-205",
-      "title": "Phase 4: Build screenshot showcase with 3D phone mockup transitions",
+      "id": "task-005",
+      "title": "Phase 4: Build article.html template — reading progress, pull quotes, end card",
       "status": "done",
-      "assignee": "video-engineer-01",
+      "assignee": "frontend-dev-01",
       "priority": "high",
-      "dependencies": ["task-203"],
+      "dependencies": ["task-003"],
       "phase": 4,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:20:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:30:00Z"
     },
     {
-      "id": "task-206",
-      "title": "Phase 4: Build feature highlight cards with kinetic typography",
+      "id": "task-006",
+      "title": "Phase 4: Add attention-grabbing effects — particles, gradient shimmer, glow hovers",
       "status": "done",
-      "assignee": "motion-designer-01",
+      "assignee": "ui-eng-01",
       "priority": "high",
-      "dependencies": ["task-203"],
+      "dependencies": ["task-004", "task-005"],
       "phase": 4,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:20:00Z"
+      "createdAt": "2026-03-18T22:30:00Z",
+      "updatedAt": "2026-03-18T22:45:00Z"
     },
     {
-      "id": "task-207",
-      "title": "Phase 4: Build epic outro with CTA and download badges",
+      "id": "task-007",
+      "title": "Phase 5: Test-render templates with Jinja2 builder pipeline",
       "status": "done",
-      "assignee": "video-engineer-01",
+      "assignee": "qa-eng-01",
       "priority": "high",
-      "dependencies": ["task-203"],
-      "phase": 4,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:20:00Z"
+      "dependencies": ["task-006"],
+      "phase": 5,
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:50:00Z"
     },
     {
-      "id": "task-208",
-      "title": "Phase 4: Integrate audio track with fade-in/fade-out volume envelope",
+      "id": "task-008",
+      "title": "Phase 5: Rebuild output/2026-03-18 with new templates and verify all 4 pages",
       "status": "done",
-      "assignee": "audio-engineer-01",
+      "assignee": "qa-eng-01",
       "priority": "high",
-      "dependencies": ["task-204", "task-205", "task-206", "task-207"],
-      "phase": 4,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:25:00Z"
+      "dependencies": ["task-007"],
+      "phase": 5,
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:55:00Z"
     },
     {
-      "id": "task-209",
-      "title": "Phase 0: Dashboard enhancement - add task search/filter and animations",
+      "id": "task-009",
+      "title": "Phase 5: Serve locally and verify HTTP responses for index + 3 articles",
+      "status": "done",
+      "assignee": "qa-eng-01",
+      "priority": "high",
+      "dependencies": ["task-008"],
+      "phase": 5,
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T22:58:00Z"
+    },
+    {
+      "id": "task-010",
+      "title": "Phase 6: Final validation — all tasks done, website baseline complete",
       "status": "done",
       "assignee": "architect-01",
-      "priority": "medium",
-      "dependencies": ["task-200"],
-      "phase": 0,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:08:00Z"
-    },
-    {
-      "id": "task-210",
-      "title": "Phase 5: Render final video at 1920x1080 and validate quality",
-      "status": "done",
-      "assignee": "qa-lead-01",
       "priority": "high",
-      "dependencies": ["task-208"],
-      "phase": 5,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:30:00Z"
-    },
-    {
-      "id": "task-211",
-      "title": "Phase 6: Final validation - all tasks done, video rendered, zero issues",
-      "status": "done",
-      "assignee": "qa-lead-01",
-      "priority": "high",
-      "dependencies": ["task-210", "task-209"],
+      "dependencies": ["task-009"],
       "phase": 6,
-      "createdAt": "2026-03-15T12:00:00Z",
-      "updatedAt": "2026-03-15T12:35:00Z"
+      "createdAt": "2026-03-18T22:00:00Z",
+      "updatedAt": "2026-03-18T23:02:00Z"
     }
   ]
 }

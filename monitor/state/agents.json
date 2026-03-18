@@ -3,42 +3,34 @@
     {
       "id": "architect-01",
       "name": "Lead Architect",
-      "role": "Orchestration, video pipeline design, and quality control",
+      "role": "Orchestration, website design direction, template architecture",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 4, "errors": 0 }
+      "metrics": { "tasksCompleted": 5, "errors": 0 }
     },
     {
-      "id": "video-engineer-01",
-      "name": "Video Engineer",
-      "role": "Remotion composition development, animation, and rendering",
+      "id": "ui-eng-01",
+      "name": "UI Engineer",
+      "role": "Visual design, CSS animations, attention-grabbing effects",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 4, "errors": 0 }
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
     },
     {
-      "id": "motion-designer-01",
-      "name": "Motion Designer",
-      "role": "Advanced animations, transitions, particle effects, and visual polish",
+      "id": "frontend-dev-01",
+      "name": "Frontend Developer",
+      "role": "Template development, responsive layout, component structure",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 2, "errors": 0 }
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
     },
     {
-      "id": "audio-engineer-01",
-      "name": "Audio Engineer",
-      "role": "Audio integration, sound design, and timing synchronization",
+      "id": "qa-eng-01",
+      "name": "QA Engineer",
+      "role": "Build verification, template rendering, visual QA",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 1, "errors": 0 }
-    },
-    {
-      "id": "qa-lead-01",
-      "name": "QA Lead",
-      "role": "Render validation, visual QA, and final acceptance testing",
-      "status": "done",
-      "currentTask": null,
-      "metrics": { "tasksCompleted": 2, "errors": 0 }
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
     }
   ]
 }
