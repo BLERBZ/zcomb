@@ -1,180 +1,180 @@
 {
   "tasks": [
     {
-      "id": "task-101",
-      "title": "Phase 1: Research existing templates, soul system, and deployment pipeline",
+      "id": "task-300",
+      "title": "Phase 1: Research Claude-Code-Game-Studios repo and Mutatis integration points",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
       "dependencies": [],
       "phase": 1,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:15:00Z"
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:10:00Z"
     },
     {
-      "id": "task-102",
-      "title": "Phase 2: Design heart icon UI component — transparent, bottom-right, animated",
-      "status": "done",
-      "assignee": "frontend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-101"],
-      "phase": 2,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:18:00Z"
-    },
-    {
-      "id": "task-103",
-      "title": "Phase 2: Design like data persistence architecture (local + Vercel)",
-      "status": "done",
-      "assignee": "backend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-101"],
-      "phase": 2,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:18:00Z"
-    },
-    {
-      "id": "task-104",
-      "title": "Phase 4: Build heart UI — SVG icon, CSS animations, click interaction, localStorage",
-      "status": "done",
-      "assignee": "frontend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-102"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:22:00Z"
-    },
-    {
-      "id": "task-105",
-      "title": "Phase 4: Inject heart component into index.html template",
-      "status": "done",
-      "assignee": "frontend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-104"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-106",
-      "title": "Phase 4: Inject heart component into article.html template",
-      "status": "done",
-      "assignee": "frontend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-104"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-107",
-      "title": "Phase 4: Create Vercel serverless API function for recording likes",
-      "status": "done",
-      "assignee": "backend-eng-01",
-      "priority": "high",
-      "dependencies": ["task-103"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:24:00Z"
-    },
-    {
-      "id": "task-108",
-      "title": "Phase 4: Create src/likes.py — like data aggregation and analysis module",
-      "status": "done",
-      "assignee": "soul-eng-01",
-      "priority": "high",
-      "dependencies": ["task-103"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:22:00Z"
-    },
-    {
-      "id": "task-109",
-      "title": "Phase 4: Integrate likes into soul.py evolution context as reinforcement signal",
-      "status": "done",
-      "assignee": "soul-eng-01",
-      "priority": "high",
-      "dependencies": ["task-108"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-110",
-      "title": "Phase 4: Integrate likes into content.py theme selection weighting",
-      "status": "done",
-      "assignee": "soul-eng-01",
-      "priority": "high",
-      "dependencies": ["task-108"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-111",
-      "title": "Phase 4: Update builder.py to pass like context to templates",
-      "status": "done",
-      "assignee": "backend-eng-01",
-      "priority": "medium",
-      "dependencies": ["task-108"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-112",
-      "title": "Phase 4: Update generator.py to include likes in generation pipeline",
-      "status": "done",
-      "assignee": "soul-eng-01",
-      "priority": "high",
-      "dependencies": ["task-109", "task-110"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:20:00Z"
-    },
-    {
-      "id": "task-113",
-      "title": "Phase 4: Update vercel.json with API routes and CORS headers",
-      "status": "done",
-      "assignee": "backend-eng-01",
-      "priority": "medium",
-      "dependencies": ["task-107"],
-      "phase": 4,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:19:00Z"
-    },
-    {
-      "id": "task-114",
-      "title": "Phase 5: Test-render templates with heart component and verify all pages",
-      "status": "done",
-      "assignee": "qa-eng-01",
-      "priority": "high",
-      "dependencies": ["task-105", "task-106"],
-      "phase": 5,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:30:00Z"
-    },
-    {
-      "id": "task-115",
-      "title": "Phase 5: Validate likes module integration with soul and content systems",
-      "status": "done",
-      "assignee": "qa-eng-01",
-      "priority": "high",
-      "dependencies": ["task-112"],
-      "phase": 5,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:30:00Z"
-    },
-    {
-      "id": "task-116",
-      "title": "Phase 6: Final validation — all tasks done, heart system fully operational",
+      "id": "task-301",
+      "title": "Phase 1: Analyze Mutatis build pipeline (builder.py, templates, static)",
       "status": "done",
       "assignee": "architect-01",
       "priority": "high",
-      "dependencies": ["task-114", "task-115"],
+      "dependencies": [],
+      "phase": 1,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:12:00Z"
+    },
+    {
+      "id": "task-302",
+      "title": "Phase 2: Clone Game Studios repo for agent pattern reference",
+      "status": "done",
+      "assignee": "architect-01",
+      "priority": "medium",
+      "dependencies": ["task-300"],
+      "phase": 2,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:18:00Z"
+    },
+    {
+      "id": "task-303",
+      "title": "Phase 3: Design games page architecture and mini-game selection",
+      "status": "done",
+      "assignee": "architect-01",
+      "priority": "high",
+      "dependencies": ["task-301"],
+      "phase": 3,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:20:00Z"
+    },
+    {
+      "id": "task-304",
+      "title": "Phase 4: Build Neon Snake game with Canvas",
+      "status": "done",
+      "assignee": "game-dev-01",
+      "priority": "high",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:30:00Z"
+    },
+    {
+      "id": "task-305",
+      "title": "Phase 4: Build Brick Breaker game with Canvas",
+      "status": "done",
+      "assignee": "game-dev-01",
+      "priority": "high",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:30:00Z"
+    },
+    {
+      "id": "task-306",
+      "title": "Phase 4: Build Asteroid Dodge game with Canvas",
+      "status": "done",
+      "assignee": "game-dev-01",
+      "priority": "high",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:30:00Z"
+    },
+    {
+      "id": "task-307",
+      "title": "Phase 4: Build Color Cascade (Simon Says) game",
+      "status": "done",
+      "assignee": "game-dev-01",
+      "priority": "high",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:30:00Z"
+    },
+    {
+      "id": "task-308",
+      "title": "Phase 4: Build Word Blitz typing game",
+      "status": "done",
+      "assignee": "game-dev-01",
+      "priority": "medium",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:30:00Z"
+    },
+    {
+      "id": "task-309",
+      "title": "Phase 4: Create games.html template extending _base.html with game launcher",
+      "status": "done",
+      "assignee": "frontend-eng-01",
+      "priority": "high",
+      "dependencies": ["task-303"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:32:00Z"
+    },
+    {
+      "id": "task-310",
+      "title": "Phase 4: Add games navigation link to all templates and update builder.py",
+      "status": "done",
+      "assignee": "frontend-eng-01",
+      "priority": "high",
+      "dependencies": ["task-309"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:35:00Z"
+    },
+    {
+      "id": "task-311",
+      "title": "Phase 4: Build game launcher UI with cards, scores, and animations",
+      "status": "done",
+      "assignee": "ux-designer-01",
+      "priority": "high",
+      "dependencies": ["task-309"],
+      "phase": 4,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:32:00Z"
+    },
+    {
+      "id": "task-312",
+      "title": "Phase 5: Test all games for playability, responsiveness, and performance",
+      "status": "done",
+      "assignee": "qa-eng-01",
+      "priority": "high",
+      "dependencies": ["task-304", "task-305", "task-306", "task-307", "task-308"],
+      "phase": 5,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:40:00Z"
+    },
+    {
+      "id": "task-313",
+      "title": "Phase 5: Validate build pipeline produces games page correctly",
+      "status": "done",
+      "assignee": "qa-eng-01",
+      "priority": "high",
+      "dependencies": ["task-310"],
+      "phase": 5,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:42:00Z"
+    },
+    {
+      "id": "task-314",
+      "title": "Phase 0: Enhance monitoring dashboard UI/UX",
+      "status": "done",
+      "assignee": "dashboard-eng-01",
+      "priority": "medium",
+      "dependencies": [],
+      "phase": 0,
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:45:00Z"
+    },
+    {
+      "id": "task-315",
+      "title": "Phase 6: Final validation — all games working, site builds cleanly",
+      "status": "done",
+      "assignee": "architect-01",
+      "priority": "high",
+      "dependencies": ["task-312", "task-313", "task-314"],
       "phase": 6,
-      "createdAt": "2026-03-18T23:10:00Z",
-      "updatedAt": "2026-03-18T23:32:00Z"
+      "createdAt": "2026-03-21T08:00:00Z",
+      "updatedAt": "2026-03-21T08:50:00Z"
     }
   ]
 }

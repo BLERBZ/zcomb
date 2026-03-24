@@ -3,42 +3,50 @@
     {
       "id": "architect-01",
       "name": "Lead Architect",
-      "role": "System design, reinforcement learning architecture, soul integration",
+      "role": "Game integration design, template architecture, build pipeline coordination",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 6, "errors": 0 }
+      "metrics": { "tasksCompleted": 5, "errors": 0 }
+    },
+    {
+      "id": "game-dev-01",
+      "name": "Game Developer",
+      "role": "Canvas mini-game implementation, game logic, physics, rendering",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 5, "errors": 0 }
     },
     {
       "id": "frontend-eng-01",
       "name": "Frontend Engineer",
-      "role": "Heart UI component, template injection, CSS/JS animations",
+      "role": "Games page template, navigation, responsive layout, UI polish",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 4, "errors": 0 }
+      "metrics": { "tasksCompleted": 3, "errors": 0 }
     },
     {
-      "id": "backend-eng-01",
-      "name": "Backend Engineer",
-      "role": "Like API, data persistence, serverless functions",
+      "id": "ux-designer-01",
+      "name": "UX Designer",
+      "role": "Game UI/UX, animations, visual effects, theme integration",
       "status": "done",
       "currentTask": null,
-      "metrics": { "tasksCompleted": 4, "errors": 0 }
-    },
-    {
-      "id": "soul-eng-01",
-      "name": "Soul Engineer",
-      "role": "Likes module, soul integration, reinforcement feedback loop",
-      "status": "done",
-      "currentTask": null,
-      "metrics": { "tasksCompleted": 4, "errors": 0 }
+      "metrics": { "tasksCompleted": 2, "errors": 0 }
     },
     {
       "id": "qa-eng-01",
       "name": "QA Engineer",
-      "role": "Template rendering, build verification, integration testing",
+      "role": "Game testing, build validation, responsive testing, cross-browser QA",
       "status": "done",
       "currentTask": null,
       "metrics": { "tasksCompleted": 2, "errors": 0 }
+    },
+    {
+      "id": "dashboard-eng-01",
+      "name": "Dashboard Engineer",
+      "role": "ZComb monitoring dashboard UI/UX enhancements",
+      "status": "done",
+      "currentTask": null,
+      "metrics": { "tasksCompleted": 4, "errors": 0 }
     }
   ]
 }

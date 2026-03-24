@@ -1,4 +1,4 @@
-import { useState, useRef, useEffect, useCallback } from 'react';
+import { useState, useRef, useEffect, useCallback, useMemo } from 'react';
 import type { Task, Agent } from '../hooks/usePolling';
 
 const columns = [
@@ -25,6 +25,64 @@ function getAvatarColor(name: string): string {
   let hash = 0;
   for (let i = 0; i < name.length; i++) hash = name.charCodeAt(i) + ((hash << 5) - hash);
   return colors[Math.abs(hash) % colors.length];
+}
+
+/** Animated badge that pops when count changes */
+function ColumnBadge({ count, color, px }: { count: number; color: string; px: (base: number, min?: number) => number }) {
+  const prevCount = useRef(count);
+  const [pop, setPop] = useState(false);
+
+  useEffect(() => {
+    if (count !== prevCount.current) {
+      prevCount.current = count;
+      setPop(true);
+      const t = setTimeout(() => setPop(false), 400);
+      return () => clearTimeout(t);
+    }
+  }, [count]);
+
+  return (
+    <span
+      className={`kanban-badge${pop ? ' kanban-badge-pop' : ''}`}
+      style={{
+        fontSize: px(9),
+        fontWeight: 700,
+        background: `${color}18`,
+        color: color,
+        padding: `0 ${px(5)}px`,
+        borderRadius: px(8),
+        lineHeight: `${px(16)}px`,
+        flexShrink: 0,
+        display: 'inline-flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        minWidth: px(16),
+      }}
+    >
+      {count}
+    </span>
+  );
+}
+
+/** Highlights matching search text within a string */
+function HighlightText({ text, query, color }: { text: string; query: string; color: string }) {
+  if (!query) return <>{text}</>;
+  const idx = text.toLowerCase().indexOf(query.toLowerCase());
+  if (idx === -1) return <>{text}</>;
+  return (
+    <>
+      {text.slice(0, idx)}
+      <mark style={{
+        background: `${color}33`,
+        color: 'inherit',
+        borderRadius: 2,
+        padding: '0 1px',
+      }}>
+        {text.slice(idx, idx + query.length)}
+      </mark>
+      {text.slice(idx + query.length)}
+    </>
+  );
 }
 
 export function KanbanBoard({ tasks, agents, darkMode }: { tasks: Task[]; agents: Agent[]; darkMode: boolean }) {
@@ -245,18 +303,7 @@ export function KanbanBoard({ tasks, agents, darkMode }: { tasks: Task[]; agents
                     {col.label}
                   </span>
                 </div>
-                <span style={{
-                  fontSize: px(9),
-                  fontWeight: 700,
-                  background: `${col.color}18`,
-                  color: col.color,
-                  padding: `0 ${px(5)}px`,
-                  borderRadius: px(8),
-                  lineHeight: `${px(16)}px`,
-                  flexShrink: 0,
-                }}>
-                  {colTasks.length}
-                </span>
+                <ColumnBadge count={colTasks.length} color={col.color} px={px} />
               </div>
 
               {/* Cards area — scrolls vertically within column */}
@@ -308,7 +355,11 @@ export function KanbanBoard({ tasks, agents, darkMode }: { tasks: Task[]; agents
                           marginBottom: px(5),
                           wordBreak: 'break-word',
                         }}>
-                          {task.title.replace(/^Phase \d+: /, '')}
+                          <HighlightText
+                            text={task.title.replace(/^Phase \d+: /, '')}
+                            query={searchQuery}
+                            color="#58a6ff"
+                          />
                         </div>
 
                         {/* Meta row */}

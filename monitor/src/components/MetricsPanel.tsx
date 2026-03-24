@@ -1,5 +1,54 @@
 import type { Task, Agent, Metrics } from '../hooks/usePolling';
 
+/** Mini donut (ring) chart rendered as SVG */
+function MiniDonut({ progress, color, size = 32, strokeWidth = 3.5, darkMode }: {
+  progress: number;
+  color: string;
+  size?: number;
+  strokeWidth?: number;
+  darkMode: boolean;
+}) {
+  const radius = (size - strokeWidth) / 2;
+  const circumference = 2 * Math.PI * radius;
+  const offset = circumference - (progress / 100) * circumference;
+  const trackColor = darkMode ? '#21262d' : '#e1e4e8';
+
+  return (
+    <svg
+      width={size}
+      height={size}
+      viewBox={`0 0 ${size} ${size}`}
+      style={{ transform: 'rotate(-90deg)', flexShrink: 0 }}
+    >
+      {/* Background track */}
+      <circle
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={trackColor}
+        strokeWidth={strokeWidth}
+      />
+      {/* Progress arc */}
+      <circle
+        className="donut-track"
+        cx={size / 2}
+        cy={size / 2}
+        r={radius}
+        fill="none"
+        stroke={color}
+        strokeWidth={strokeWidth}
+        strokeDasharray={circumference}
+        strokeDashoffset={offset}
+        strokeLinecap="round"
+        style={{
+          filter: progress === 100 ? `drop-shadow(0 0 3px ${color})` : 'none',
+        }}
+      />
+    </svg>
+  );
+}
+
 export function MetricsPanel({ tasks, agents, metrics, darkMode }: {
   tasks: Task[];
   agents: Agent[];
@@ -53,6 +102,7 @@ export function MetricsPanel({ tasks, agents, metrics, darkMode }: {
           {phases.map(p => {
             const isComplete = p.progress === 100;
             const isActive = p.progress > 0 && p.progress < 100;
+            const ringColor = isComplete ? '#3fb950' : isActive ? '#58a6ff' : '#30363d';
             return (
               <div
                 key={p.phase}
@@ -66,25 +116,32 @@ export function MetricsPanel({ tasks, agents, metrics, darkMode }: {
                     isComplete ? (darkMode ? '#23863618' : '#dafbe1') : 'transparent',
                   border: `1px solid ${isActive ? '#58a6ff44' : isComplete ? '#3fb95033' : 'transparent'}`,
                   minWidth: 70,
-                  cursor: 'default'
+                  cursor: 'default',
+                  gap: 2,
                 }}
               >
-                {/* Phase progress mini-bar */}
-                <div style={{
-                  width: '100%',
-                  height: 3,
-                  background: barBg,
-                  borderRadius: 2,
-                  overflow: 'hidden',
-                  marginBottom: 3
-                }}>
-                  <div style={{
-                    width: `${p.progress}%`,
-                    height: '100%',
-                    background: isComplete ? '#3fb950' : isActive ? '#58a6ff' : '#30363d',
-                    borderRadius: 2,
-                    transition: 'width 0.5s ease'
-                  }} />
+                {/* Mini donut chart */}
+                <div style={{ position: 'relative', width: 30, height: 30 }}>
+                  <MiniDonut
+                    progress={p.progress}
+                    color={ringColor}
+                    size={30}
+                    strokeWidth={3}
+                    darkMode={darkMode}
+                  />
+                  {/* Centered percentage text */}
+                  <span style={{
+                    position: 'absolute',
+                    top: '50%',
+                    left: '50%',
+                    transform: 'translate(-50%, -50%)',
+                    fontSize: 7,
+                    fontWeight: 700,
+                    color: isActive ? '#58a6ff' : isComplete ? '#3fb950' : mutedColor,
+                    fontVariantNumeric: 'tabular-nums',
+                  }}>
+                    {p.progress}
+                  </span>
                 </div>
                 <span style={{
                   fontSize: 9,
@@ -95,13 +152,6 @@ export function MetricsPanel({ tasks, agents, metrics, darkMode }: {
                   whiteSpace: 'nowrap'
                 }}>
                   {p.name}
-                </span>
-                <span style={{
-                  fontSize: 8,
-                  color: mutedColor,
-                  marginTop: 1
-                }}>
-                  {p.progress}%
                 </span>
               </div>
             );

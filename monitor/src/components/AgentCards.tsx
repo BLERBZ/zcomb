@@ -14,6 +14,44 @@ const statusLabels: Record<string, string> = {
   done: 'DONE'
 };
 
+function Sparkline({ value, max, color, darkMode }: { value: number; max: number; color: string; darkMode: boolean }) {
+  const pct = max > 0 ? Math.round((value / max) * 100) : 0;
+  return (
+    <div style={{
+      display: 'flex',
+      alignItems: 'center',
+      gap: 6,
+      marginTop: 6,
+    }}>
+      <div style={{
+        flex: 1,
+        height: 4,
+        borderRadius: 2,
+        background: darkMode ? '#21262d' : '#e1e4e8',
+        overflow: 'hidden',
+      }}>
+        <div style={{
+          width: `${pct}%`,
+          height: '100%',
+          borderRadius: 2,
+          background: `linear-gradient(90deg, ${color}80, ${color})`,
+          transition: 'width 0.6s ease',
+        }} />
+      </div>
+      <span style={{
+        fontSize: 9,
+        fontWeight: 700,
+        color,
+        fontVariantNumeric: 'tabular-nums',
+        width: 24,
+        textAlign: 'right',
+      }}>
+        {pct}%
+      </span>
+    </div>
+  );
+}
+
 export function AgentCards({ agents, darkMode }: { agents: Agent[]; darkMode: boolean }) {
   const cardBg = darkMode ? '#161b22' : '#ffffff';
   const borderColor = darkMode ? '#30363d' : '#d0d7de';
@@ -28,6 +66,8 @@ export function AgentCards({ agents, darkMode }: { agents: Agent[]; darkMode: bo
     );
   }
 
+  const maxTasks = Math.max(...agents.map(a => a.metrics.tasksCompleted), 1);
+
   return (
     <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
       {agents.map(agent => {
@@ -35,14 +75,16 @@ export function AgentCards({ agents, darkMode }: { agents: Agent[]; darkMode: bo
         return (
           <div
             key={agent.id}
+            className={agent.status === 'active' ? 'agent-card-active' : ''}
             style={{
               background: cardBg,
-              border: `1px solid ${borderColor}`,
+              border: `1px solid ${agent.status === 'active' ? `${color}44` : borderColor}`,
               borderRadius: 8,
               padding: '14px 14px 12px',
               borderLeft: `3px solid ${color}`,
-              transition: 'border-color 0.3s ease'
-            }}
+              transition: 'border-color 0.3s ease, box-shadow 0.3s ease',
+              '--pulse-color': `${color}30`,
+            } as React.CSSProperties}
           >
             {/* Name + Status Badge */}
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 6 }}>
@@ -55,8 +97,22 @@ export function AgentCards({ agents, darkMode }: { agents: Agent[]; darkMode: bo
                 padding: '2px 8px',
                 borderRadius: 4,
                 letterSpacing: 0.5,
-                textTransform: 'uppercase'
+                textTransform: 'uppercase',
+                display: 'inline-flex',
+                alignItems: 'center',
+                gap: 5,
               }}>
+                {agent.status === 'active' && (
+                  <span style={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    background: color,
+                    boxShadow: `0 0 6px ${color}`,
+                    animation: 'pulse-healthy 2.5s ease-in-out infinite',
+                    flexShrink: 0,
+                  }} />
+                )}
                 {statusLabels[agent.status] || agent.status}
               </span>
             </div>
@@ -88,17 +144,26 @@ export function AgentCards({ agents, darkMode }: { agents: Agent[]; darkMode: bo
               </div>
             )}
 
-            {/* Metrics */}
+            {/* Metrics + Sparkline */}
             <div style={{
-              display: 'flex',
-              gap: 16,
-              fontSize: 11,
-              color: mutedColor,
               paddingTop: 4,
               borderTop: `1px solid ${darkMode ? '#21262d' : '#e8e8e8'}`
             }}>
-              <span>Tasks <strong style={{ color: textColor }}>{agent.metrics.tasksCompleted}</strong></span>
-              <span>Errors <strong style={{ color: agent.metrics.errors > 0 ? '#f85149' : textColor }}>{agent.metrics.errors}</strong></span>
+              <div style={{
+                display: 'flex',
+                gap: 16,
+                fontSize: 11,
+                color: mutedColor,
+              }}>
+                <span>Tasks <strong style={{ color: textColor }}>{agent.metrics.tasksCompleted}</strong></span>
+                <span>Errors <strong style={{ color: agent.metrics.errors > 0 ? '#f85149' : textColor }}>{agent.metrics.errors}</strong></span>
+              </div>
+              <Sparkline
+                value={agent.metrics.tasksCompleted}
+                max={maxTasks}
+                color={color}
+                darkMode={darkMode}
+              />
             </div>
           </div>
         );
